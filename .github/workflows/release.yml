@@ -1,0 +1,27 @@
+name: Draft Release
+on: workflow_dispatch
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Get Release Name
+        id: get-release-name
+        run: |
+          VERSION=$(jq -re '.version' planetnine.json)
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Build
+        run: git archive -o planetnine.zip --prefix=planetnine/ ${{ github.sha }}
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: v${{ steps.get-release-name.outputs.VERSION }}
+          target_commitish: ${{ github.sha }}
+          draft: true
+          files: planetnine.zip
+          fail_on_unmatched_files: true
