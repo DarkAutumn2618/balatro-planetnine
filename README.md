@@ -34,7 +34,9 @@ Left/right preference is up to the user, but the other cards have their moons on
 
 2. Install [Malverk](https://github.com/Eremel/Malverk)
 
-3. Download the zip file from the [latest release](https://github.com/DarkAutumn2618/balatro-planetnine/releases)
+    * Code > Download ZIP
+
+3. Download this mod's zip file from the [latest release](https://github.com/DarkAutumn2618/balatro-planetnine/releases)
 
 4. Open the zip file and place the **planetnine** folder into the Balatro mods folder
 
