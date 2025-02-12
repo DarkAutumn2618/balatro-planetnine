@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      MOD_METADATA: planetnine.json
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -13,15 +15,22 @@ jobs:
       - name: Get Release Name
         id: get-release-name
         run: |
-          VERSION=$(jq -re '.version' planetnine.json)
-          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          MOD_ID=$(jq -re '.id' "$MOD_METADATA")
+          echo "MOD_ID=$MOD_ID" >> "$GITHUB_ENV"
+          MOD_VERSION=$(jq -re '.version' "$MOD_METADATA")
+          echo "MOD_VERSION=$MOD_VERSION" >> "$GITHUB_ENV"
       - name: Build
-        run: git archive -o planetnine.zip --prefix=planetnine/ ${{ github.sha }}
+        run: |
+          mv '.github/workflows/release.gitattributes' '.gitattributes'
+          git archive --worktree-attributes -o "${MOD_ID}.zip" --prefix="${MOD_ID}/" ${{ github.sha }}
       - name: Release
+        id: release
         uses: softprops/action-gh-release@v2
         with:
-          name: v${{ steps.get-release-name.outputs.VERSION }}
+          name: v${{ env.MOD_VERSION }}
           target_commitish: ${{ github.sha }}
           draft: true
-          files: planetnine.zip
+          files: ${{ env.MOD_ID }}.zip
           fail_on_unmatched_files: true
+      - name: Write Summary
+        run: echo '[Release drafted](${{ steps.release.outputs.url }})' >> "$GITHUB_STEP_SUMMARY"
