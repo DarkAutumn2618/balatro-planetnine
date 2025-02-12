@@ -20,9 +20,7 @@ jobs:
           MOD_VERSION=$(jq -re '.version' "$MOD_METADATA")
           echo "MOD_VERSION=$MOD_VERSION" >> "$GITHUB_ENV"
       - name: Build
-        run: |
-          mv '.github/workflows/release.gitattributes' '.gitattributes'
-          git archive --worktree-attributes -o "${MOD_ID}.zip" --prefix="${MOD_ID}/" ${{ github.sha }}
+        run: git archive -o "${MOD_ID}.zip" --prefix="${MOD_ID}/" ${{ github.sha }}
       - name: Release
         id: release
         uses: softprops/action-gh-release@v2
