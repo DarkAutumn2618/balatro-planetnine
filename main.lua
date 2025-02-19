@@ -1,5 +1,4 @@
 -- Planet Nine - Retexture
-
 AltTexture({
     key = "tx_planetnine_retexture",   -- the key of the texture
     set = "Planet",                    -- define the object type that you are retexturing, see wiki for full list of types
@@ -12,15 +11,7 @@ AltTexture({
     },
 })
 
-TexturePack({
-    key = "tp_planetnine_retexture", -- the key of the texture
-    textures = {                     -- a table of keys of your AltTexture objects
-        "planetnine_tx_planetnine_retexture",
-    },
-})
-
 -- Planet Nine - Name Only
-
 AltTexture({
     key = "tx_planetnine_nameonly",   -- the key of the texture
     set = "Planet",                   -- define the object type that you are retexturing, see wiki for full list of types
@@ -33,15 +24,7 @@ AltTexture({
     },
 })
 
-TexturePack({
-    key = "tp_planetnine_nameonly", -- the key of the texture
-    textures = {                    -- a table of keys of your AltTexture objects
-        "planetnine_tx_planetnine_nameonly",
-    },
-})
-
--- Pluto & Charon (L)
-
+-- Pluto & Charon - Left Variant
 AltTexture({
     key = "tx_pluto_charon_l",   -- the key of the texture
     set = "Planet",            -- define the object type that you are retexturing, see wiki for full list of types
@@ -51,15 +34,7 @@ AltTexture({
     },
 })
 
-TexturePack({
-    key = "tp_pluto_charon_l", -- the key of the texture
-    textures = {             -- a table of keys of your AltTexture objects
-        "planetnine_tx_pluto_charon_l",
-    },
-})
-
--- Pluto & Charon (R)
-
+-- Pluto & Charon - Right Variant
 AltTexture({
     key = "tx_pluto_charon_r",   -- the key of the texture
     set = "Planet",            -- define the object type that you are retexturing, see wiki for full list of types
@@ -69,9 +44,17 @@ AltTexture({
     },
 })
 
+-- Texture Pack
 TexturePack({
-    key = "tp_pluto_charon_r", -- the key of the texture
-    textures = {             -- a table of keys of your AltTexture objects
+    key = "tp_planetnine", -- the key of the texture pack
+    textures = {           -- a table of keys of your AltTexture objects
+        "planetnine_tx_planetnine_retexture",
+        "planetnine_tx_planetnine_nameonly",
+        "planetnine_tx_pluto_charon_l",
+        "planetnine_tx_pluto_charon_r",
+    },
+    toggle_textures = {    -- a table of keys of AltTexture objects that start disabled
+        "planetnine_tx_planetnine_nameonly",
         "planetnine_tx_pluto_charon_r",
     },
 })
